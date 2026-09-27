@@ -1,27 +1,38 @@
 import string
 import random
-s1=string.ascii_lowercase
-s2=string.ascii_uppercase
-s3=string.digits
-s4=string.punctuation
-s5=string.hexdigits
+
+lowercase = string.ascii_lowercase
+uppercase = string.ascii_uppercase
+digits = string.digits
+special = string.punctuation
+
 while True:
     try:
-        passlen=int(input("Enter your password length: "))
-        if passlen<=0:
-            print("Password lenght must be greater than 0. ")
+        passlen = int(input("Enter your password length: "))
+
+        if passlen <= 0:
+            print("Password length must be greater than 0.")
+        elif passlen < 4:
+            print("Password length should be at least 4.")
         else:
             break
-    except ValueError:
-        print("Please enter a valid number: ")
-            
 
-s= []
-s.extend(list(s1))
-s.extend(list(s2))
-s.extend(list(s3))
-s.extend(list(s4))
-s.extend(list(s5))
-random.shuffle(s)
-print("Your password is: ")
-print("".join(s[0:passlen]))
+    except ValueError:
+        print("Please enter a valid number.")
+
+characters = lowercase + uppercase + digits + special
+
+password = []
+
+password.append(random.choice(lowercase))
+password.append(random.choice(uppercase))
+password.append(random.choice(digits))
+password.append(random.choice(special))
+
+for i in range(passlen - 4):
+    password.append(random.choice(characters))
+
+random.shuffle(password)
+
+print("Your password is:")
+print("".join(password))
